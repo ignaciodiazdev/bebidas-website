@@ -1,15 +1,24 @@
+import { useAppStore } from '../stores/useAppStore'
 import { Outlet } from 'react-router-dom'
 import Header from '../components/Header'
+import Modal from '../components/Modal'
+import { useEffect } from 'react'
 
 const Layout = () => {
+  const loadFromStorage = useAppStore(state => state.loadFromStorage)
+
+  useEffect(()=>{
+    loadFromStorage()
+  },[])
+  
   return (
-    <div>
+    <>
       <Header/>
       <main className='container mx-auto px-5 py-16'>
         <Outlet/>
       </main>
-    </div>
-    
+      <Modal/>
+    </>
   )
 }
 
